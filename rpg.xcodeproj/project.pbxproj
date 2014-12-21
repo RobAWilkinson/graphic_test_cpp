@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B6FC5DFB1A46A90E0089CA08 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6FC5DFA1A46A90E0089CA08 /* main.cpp */; };
+		B6FC5E021A46A9920089CA08 /* dialogue.hpp in Sources */ = {isa = PBXBuildFile; fileRef = B6FC5E011A46A9920089CA08 /* dialogue.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		B6FC5DF71A46A90E0089CA08 /* rpg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rpg; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FC5DFA1A46A90E0089CA08 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B6FC5E011A46A9920089CA08 /* dialogue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dialogue.hpp; sourceTree = "<group>"; };
+		B6FC5E031A46AC360089CA08 /* creature.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = creature.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				B6FC5DFA1A46A90E0089CA08 /* main.cpp */,
+				B6FC5E011A46A9920089CA08 /* dialogue.hpp */,
+				B6FC5E031A46AC360089CA08 /* creature.hpp */,
 			);
 			path = rpg;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FC5DFB1A46A90E0089CA08 /* main.cpp in Sources */,
+				B6FC5E021A46A9920089CA08 /* dialogue.hpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +201,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -232,6 +239,7 @@
 				B6FC5E001A46A90E0089CA08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
