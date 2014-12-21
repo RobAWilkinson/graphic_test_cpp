@@ -51,6 +51,70 @@ public:
         
     }
     Creature(){}
+    // returns experience needed to level up
+    unsigned int expToLevel(unsigned int level)
+    {
+        return 128 * level * level;
+    }
+    // checks to see if needs level up
+    // adjusts stats accordingly and returns true if leveled up false if nots
+    bool levelUp()
+    {
+        if (this->exp >= expToLevel(this->level + 1)) {
+            // Advance to the next level
+            ++ level;
+            
+            // Variables to track stat changes, they should all be resolved at the end of the function
+            unsigned int healthBoost = 0;
+            unsigned int strBoost = 0;
+            unsigned int endBoost = 0;
+            unsigned int dexBoost = 0;
+            
+            // Give a large Health Increase every Four levels
+            
+            if ( level % 4 == 0 )
+            {
+                healthBoost = 10 + (rand() % 4) + this->end /4;
+                
+            }
+            
+            // Else give a normal one
+            else
+            {
+                healthBoost = (rand() % 4) + this->end /4;
+            }
+            
+            // IF is a fighter increase strength and endurance,
+            if (this->className == "Fighter") {
+                strBoost = 1;
+                endBoost = 1;
+                if ( rand() % 2 == 0) { dexBoost = 1; }
+                
+            }
+            
+            // If is a rogue increase dexterity and endurance
+            if (this->className == "Rogue") {
+                endBoost = 1;
+                dexBoost = 1;
+                if (rand() % 2 == 0){ strBoost = 1; }
+            }
+            
+            // Readjust the class variables based on the new boosts
+            this->health += healthBoost;
+            this->str += strBoost;
+            this->end += endBoost;
+            this->dex += dexBoost;
+            
+            // Tell the user they grew a level
+            std::cout << "Congratualions " << this->name << " has leveled up" << std::endl;
+            std::cout << "Strength: " << this->str << std::endl;
+            std::cout << "Endurance: " << this->end << std::endl;
+            std::cout << "Dexterity: " << this->dex << std::endl;
+            std::cout << "Now has " << this->health << std::endl;
+            return true;
+        }
+        return false;
+    }
 };
 
 #endif /* CREATURE_HPP */
