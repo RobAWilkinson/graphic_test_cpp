@@ -40,11 +40,7 @@ Creature dialogue_newChar()
     std::cout << "Choose your name" << std::endl;
     std::string name;
     std::cin >> name;
-	std::vector<std::string> choices;
-	choices.push_back("Fighter");
-	choices.push_back("Rogue");
-	std::cout << choices[0];
-    int result = Dialogue("Choose your class", choices).activate();
+    int result = Dialogue("Choose your class", {"Fighter","Rogue"}).activate();
     switch (result) {
         case 1:
             return Creature(name,35,20,10,5,10.0,1,"Fighter" );
