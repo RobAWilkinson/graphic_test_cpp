@@ -15,6 +15,7 @@
 #include <ctime>
 #include "dialogue.hpp"
 #include "creature.hpp"
+#include "monster.hpp"
 
 Creature dialogue_newChar();
 void describe(Creature player);
@@ -23,6 +24,7 @@ void describe(Creature player);
 int main(void) {
     Creature player;
     srand(time(NULL));
+	Monster monster;
     int result = Dialogue("Welcome",{"New Game"}).activate();
     switch (result) {
         case 1:
@@ -33,6 +35,27 @@ int main(void) {
             return 0;
             break;
     }
+	result = Dialogue("What woudl you like to do?", { "Explore", "Look Around" }).activate();
+	switch (result)
+	{
+	int fight_or_flight;
+	case 1:
+		monster = Monster("Green Slime", "poison", 20, 5, 10.0, 1);
+		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Woudl you like to?"), { "Battle", "Run Away" }).activate();
+		switch (fight_or_flight){
+		case 1:
+			std::cout << "you choose to fight!";
+			break;
+		default:
+			std::cout << "You ran away :(";
+			break;
+
+		}
+		break;
+	default:
+		return 0;
+		break;
+	}
     return 0;
 }
 
