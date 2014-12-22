@@ -17,6 +17,7 @@
 #include "creature.hpp"
 
 Creature dialogue_newChar();
+void describe(Creature player);
 
 
 int main(void) {
@@ -26,6 +27,7 @@ int main(void) {
     switch (result) {
         case 1:
             player = dialogue_newChar();
+			player.describe();
             break;
         default:
             return 0;
@@ -40,16 +42,18 @@ Creature dialogue_newChar()
     std::cout << "Choose your name" << std::endl;
     std::string name;
     std::cin >> name;
-    int result = Dialogue("Choose your class", {"Fighter","Rogue"}).activate();
+    int result = Dialogue("Choose your class", {"Fighter","Rogue", "Mage"}).activate();
     switch (result) {
         case 1:
-            return Creature(name,35,20,10,5,10.0,1,"Fighter" );
+            return Creature(name, 35, 20, 10, 5, 5, 10.0, 1, "Fighter" );
             break;
         case 2:
-            return Creature(name,30,5,10,20,15.0,1,"Rogue");
+            return Creature(name, 30, 5, 10, 20, 10, 15.0, 1, "Rogue");
             break;
+		case 3:
+			return Creature(name, 20, 3, 10, 10, 20, 15.0, 1, "Mage");
         default:
-            return Creature(name, 30, 10, 10, 10, 10.0, 1,
+            return Creature(name, 30, 10, 10, 10, 10, 10.0, 1,
                             "Adventurer");
             break;
     }

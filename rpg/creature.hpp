@@ -23,6 +23,7 @@ public:
     int str;        // Strength. Determines damage in battle (1-100)
     int end;        // Endurance. Determines maximum health (1-100)
     int dex;        // Dexterity. Determines speed in battle (1-100)
+	int intelligence; // Intelligence, determines mana pool and spell powers
     double hitRate; // Modifier to hit chance. (1-150)
     
     // Current level of the creature.
@@ -36,14 +37,15 @@ public:
     // Current experience. 0-1M is reasonable, see the levelup() function
     // for a decent scale
     unsigned int exp;
-    
-    Creature(std::string name, int health, int str, int end, int dex, double hitRate, unsigned int level = 1, std::string className = "")
+
+    Creature(std::string name, int health, int str, int end, int dex, int intelligence, double hitRate, unsigned int level = 1, std::string className = "")
     {
         this->name = name;
         this->health = health;
         this->str = str;
         this->end = end;
         this->dex = dex;
+		this->intelligence = intelligence;
         this->hitRate = hitRate;
         this->level = level;
         this->className = className;
@@ -69,6 +71,7 @@ public:
             unsigned int strBoost = 0;
             unsigned int endBoost = 0;
             unsigned int dexBoost = 0;
+			unsigned int intBoost = 0;
             
             // Give a large Health Increase every Four levels
             
@@ -88,7 +91,10 @@ public:
             if (this->className == "Fighter") {
                 strBoost = 1;
                 endBoost = 1;
-                if ( rand() % 2 == 0) { dexBoost = 1; }
+                if ( rand() % 2 == 0) { 
+					dexBoost = 1;
+					intBoost = 1;
+				}
                 
             }
             
@@ -96,8 +102,24 @@ public:
             if (this->className == "Rogue") {
                 endBoost = 1;
                 dexBoost = 1;
-                if (rand() % 2 == 0){ strBoost = 1; }
+                if (rand() % 2 == 0){ 
+					strBoost = 1;
+					intBoost = 1;
+				}
             }
+			// If a mage, increase intelligence
+			if (this->className == "Mage")
+			{
+				endBoost = 1;
+				intBoost = 1;
+				if (rand() % 2 == 0)
+				{
+					strBoost = 1;
+					dexBoost = 1;
+				}
+
+
+			}
             
             // Readjust the class variables based on the new boosts
             this->health += healthBoost;
@@ -110,11 +132,20 @@ public:
             std::cout << "Strength: " << this->str << std::endl;
             std::cout << "Endurance: " << this->end << std::endl;
             std::cout << "Dexterity: " << this->dex << std::endl;
+			std::cout << "Intelligence: " << this->intelligence << std::endl;
             std::cout << "Now has " << this->health << std::endl;
             return true;
         }
         return false;
     }
+	void describe()
+	{
+		std::cout << "You are a level " << this->level << " " << this->className << std::endl;
+		std::cout << "Strength: " << this->str << std::endl;
+		std::cout << "Endurance: " << this->end << std::endl;
+		std::cout << "Dexterity: " << this->dex << std::endl;
+		std::cout << "Intelligence: " << this->intelligence << std::endl;
+	}
 };
 
 #endif /* CREATURE_HPP */

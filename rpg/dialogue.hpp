@@ -31,11 +31,11 @@ public:
         for (int i = 0; i < this->choices.size(); ++i) {
             std::cout << i+1 << ": " << this->choices[i] << std::endl;
         }
-        int userInput = -1;
+        signed int userInput = -1;
         
         while(true)
         {
-        std:std::cin >> userInput;
+        std::cin >> userInput;
             if (userInput >= 0 && userInput <= choices.size()) {
                 return userInput;
             }
