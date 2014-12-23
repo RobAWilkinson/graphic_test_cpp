@@ -26,6 +26,8 @@ int main(void) {
     Creature player;
     srand(time(NULL));
 	Monster monster;
+	Battle battle;
+
     int result = Dialogue("Welcome",{"New Game"}).activate();
     switch (result) {
         case 1:
@@ -36,6 +38,7 @@ int main(void) {
             return 0;
             break;
     }
+	start:
 	result = Dialogue("What woudl you like to do?", { "Explore", "Look Around" }).activate();
 	switch (result)
 	{
@@ -48,11 +51,9 @@ int main(void) {
 		switch (fight_or_flight){
 		case 1:
 			std::cout << "you choose to fight!";
-			while (monster.health >= 0 || player.health >= 0)
-			{
-				Battle(player, monster);
-
-			}
+			battle = Battle(player, monster);
+			battle.fight();
+			goto start;
 			break;
 		default:
 			std::cout << "You ran away :(";
@@ -64,6 +65,7 @@ int main(void) {
 		return 0;
 		break;
 	}
+
     return 0;
 }
 
@@ -80,6 +82,7 @@ Creature dialogue_newChar()
             player = Creature(name, 35, 20, 10, 5, 5, 10.0, 1, "Fighter" );
 			player.addAttack("punch", "physical", 3, 1.0);
 			player.addAttack("Kick", "physical", 3, 1.2);
+			player.addAttack("DEBUG", "DEBUG", 20, 3);
 			return player;
 			break;
         case 2:
