@@ -158,7 +158,18 @@ public:
 	}
 	bool hit()
 	{
-		if ((rand() % 20) < this->hitRate)
+		if ((rand() % 11) < this->hitRate)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool alive()
+	{
+		if (this->health > 0)
 		{
 			return true;
 		}
