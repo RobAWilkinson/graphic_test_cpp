@@ -2,6 +2,8 @@
 #define MONSTER_HPP
 
 #include <string>
+#include <vector>
+#include "attack.hpp"
 // createThe  Monster class
 
 class Monster
@@ -19,6 +21,7 @@ public:
 	int health, maxHealth, str;
 	double hitRate;
 	unsigned int level;
+	std::vector < Attack > attacks;
 
 	Monster(std::string name, std::string type, int health, int str, double hitRate, unsigned int level)
 	{
@@ -40,12 +43,22 @@ public:
 			return false;
 		}
 	}
-	int baseDamage()
+	void addAttack(std::string attack_name, std::string attack_type, int baseDamage, double baseMultiplier)
 	{
-		return ((this->level * this->str) * .25);
-
+		Attack new_attack = Attack(attack_name, attack_type, baseDamage, baseMultiplier);
+		this->attacks.push_back(new_attack);
 
 	}
+	Attack randomAttack()
+	{
+		return this->attacks[rand() % this->attacks.size()];
+	}
+	void dropHealth(int damage)
+	{
+		this->health -= damage;
+	}
+	
+	// Default constructor for declarations
 		Monster(){}
 
 

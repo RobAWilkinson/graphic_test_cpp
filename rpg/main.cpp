@@ -16,6 +16,7 @@
 #include "dialogue.hpp"
 #include "creature.hpp"
 #include "monster.hpp"
+#include "battle.hpp"
 
 Creature dialogue_newChar();
 void describe(Creature player);
@@ -41,10 +42,17 @@ int main(void) {
 	int fight_or_flight;
 	case 1:
 		monster = Monster("Green Slime", "poison", 20, 5, 10.0, 1);
+		monster.addAttack("slime", "poison", 3, 1.0);
+		monster.addAttack("Bite", "physical", 3, 1.2);
 		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Woudl you like to?"), { "Battle", "Run Away" }).activate();
 		switch (fight_or_flight){
 		case 1:
 			std::cout << "you choose to fight!";
+			while (monster.health >= 0 || player.health >= 0)
+			{
+				Battle(player, monster);
+
+			}
 			break;
 		default:
 			std::cout << "You ran away :(";
@@ -65,11 +73,15 @@ Creature dialogue_newChar()
     std::cout << "Choose your name" << std::endl;
     std::string name;
     std::cin >> name;
+	Creature player;
     int result = Dialogue("Choose your class", {"Fighter","Rogue", "Mage"}).activate();
     switch (result) {
         case 1:
-            return Creature(name, 35, 20, 10, 5, 5, 10.0, 1, "Fighter" );
-            break;
+            player = Creature(name, 35, 20, 10, 5, 5, 10.0, 1, "Fighter" );
+			player.addAttack("punch", "physical", 3, 1.0);
+			player.addAttack("Kick", "physical", 3, 1.2);
+			return player;
+			break;
         case 2:
             return Creature(name, 30, 5, 10, 20, 10, 15.0, 1, "Rogue");
             break;

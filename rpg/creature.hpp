@@ -10,12 +10,14 @@
 #define CREATURE_HPP
 
 #include <string>
+#include "monster.hpp"
 
 class Creature
 {
 public:
     std::string name;
     std::string className;
+	std::vector < Attack > attacks;
     
     // Creature stats. Reasonable values are in parentheses
     int health;     // Current hit points (10-1000+)
@@ -138,6 +140,7 @@ public:
         }
         return false;
     }
+	// Output stats to cout
 	void describe()
 	{
 		std::cout << "You are a level " << this->level << " " << this->className << std::endl;
@@ -145,6 +148,24 @@ public:
 		std::cout << "Endurance: " << this->end << std::endl;
 		std::cout << "Dexterity: " << this->dex << std::endl;
 		std::cout << "Intelligence: " << this->intelligence << std::endl;
+	}
+	//add an attack to the attack vector
+	void addAttack(std::string attack_name, std::string attack_type, int baseDamage, double baseMultiplier)
+	{
+		Attack new_attack = Attack(attack_name, attack_type, baseDamage, baseMultiplier);
+		this->attacks.push_back(new_attack);
+
+	}
+	bool hit()
+	{
+		if ((rand() % 20) < this->hitRate)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 };
 
