@@ -23,11 +23,12 @@ public:
 		Attack playerAttack, monsterAttack;
 		int index;
 		// pass the different attack types as a vector of strings to dialogue
-		for each (Attack attack in this->player.attacks)
-		{
-			choices.push_back(attack.name);
-
-		}
+        // pass the different attack types as a vector of strings to dialogue
+        for(int i =0; i < this->player.attacks.size();i++)
+        {
+            choices.push_back(player.attacks[i].name);
+            
+        }
 		while (this->monster.alive())
 		{
 			// receive a 1 based index number of which attack should happen
