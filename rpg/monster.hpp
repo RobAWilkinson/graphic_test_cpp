@@ -28,6 +28,7 @@ public:
 		this->name = name;
 		this->type = type;
 		this->health = health;
+		this->maxHealth = health;
 		this->str = str;
 		this->hitRate = hitRate;
 		this->level = level;
@@ -57,7 +58,17 @@ public:
 	{
 		this->health -= damage;
 	}
-	
+	bool alive()
+	{
+		if (this->health > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	// Default constructor for declarations
 		Monster(){}
 
