@@ -17,6 +17,7 @@
 #include "creature.hpp"
 #include "monster.hpp"
 #include "battle.hpp"
+using namespace std;
 
 Creature dialogue_newChar();
 void describe(Creature player);
@@ -50,13 +51,13 @@ int main(void) {
 		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Woudl you like to?"), { "Battle", "Run Away" }).activate();
 		switch (fight_or_flight){
 		case 1:
-			std::cout << "you choose to fight!";
+			cout << "you choose to fight!";
 			battle = Battle(player, monster);
 			battle.fight();
 			goto start;
 			break;
 		default:
-			std::cout << "You ran away :(";
+			cout << "You ran away :(";
 			break;
 
 		}
@@ -72,9 +73,9 @@ int main(void) {
 Creature dialogue_newChar()
 {
     //ask for name and class
-    std::cout << "Choose your name" << std::endl;
-    std::string name;
-    std::cin >> name;
+    cout << "Choose your name" << endl;
+    string name;
+    cin >> name;
 	Creature player;
     int result = Dialogue("Choose your class", {"Fighter","Rogue", "Mage"}).activate();
     switch (result) {

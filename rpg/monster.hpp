@@ -6,6 +6,8 @@
 #include "attack.hpp"
 // createThe  Monster class
 
+using namespace std;
+
 class Monster
 {
 	//Monster clas has these properties:
@@ -17,13 +19,13 @@ class Monster
 	//Strength, how hard it hits for
 	//level, 
 public:
-	std::string name, type;
+	string name, type;
 	int health, maxHealth, str;
 	double hitRate;
 	unsigned int level;
-	std::vector < Attack > attacks;
+	vector < Attack > attacks;
 
-	Monster(std::string name, std::string type, int health, int str, double hitRate, unsigned int level)
+	Monster(string name, string type, int health, int str, double hitRate, unsigned int level)
 	{
 		this->name = name;
 		this->type = type;
@@ -44,7 +46,7 @@ public:
 			return false;
 		}
 	}
-	void addAttack(std::string attack_name, std::string attack_type, int baseDamage, double baseMultiplier)
+	void addAttack(string attack_name, string attack_type, int baseDamage, double baseMultiplier)
 	{
 		Attack new_attack = Attack(attack_name, attack_type, baseDamage, baseMultiplier);
 		this->attacks.push_back(new_attack);

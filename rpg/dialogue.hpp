@@ -13,29 +13,29 @@
 #include <string>
 #include <vector>
 // Gameplay uses dialogue
-
+using namespace std;
 class Dialogue
 {
 private:
-    std::string description;
-    std::vector<std::string> choices;
+    string description;
+    vector<string> choices;
 public:
-    Dialogue(std::string description, std::vector<std::string> choices)
+    Dialogue(string description, vector<string> choices)
     {
         this->description = description;
         this->choices = choices;
     }
     int activate()
     {
-        std::cout << description << std::endl;
+        cout << description << endl;
         for (int i = 0; i < this->choices.size(); ++i) {
-            std::cout << i+1 << ": " << this->choices[i] << std::endl;
+            cout << i+1 << ": " << this->choices[i] << endl;
         }
         signed int userInput = -1;
         
         while(true)
         {
-        std::cin >> userInput;
+        cin >> userInput;
             if (userInput >= 0 && userInput <= choices.size()) {
                 return userInput;
             }
