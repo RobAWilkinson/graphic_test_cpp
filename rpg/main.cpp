@@ -58,7 +58,7 @@ int main(void) {
 		switch (fight_or_flight){
 		case 1:
 			std::cout << "you choose to fight!";
-			battle = Battle(player, monster);
+			battle = Battle(&player, &monster);
 			battle.fight();
 			goto start;
 			break;
