@@ -5,3 +5,11 @@
 ####Instructions for onboarding:
 * Open project in xcode, build and run.  
 * GCC doesnt seem to like the `{"Fighter","Rogue"}` vector syntax, works fine in xcode though
+
+
+#### Compiling on Linux
+* install clang++
+* install libc++-dev
+* cd ./rpg
+* make
+
