@@ -17,9 +17,13 @@
 #include "creature.hpp"
 #include "monster.hpp"
 #include "battle.hpp"
+#include "area.hpp"
+#include "room.hpp"
+#include "path.hpp"
 using namespace std;
 
 Creature dialogue_newChar();
+Monster getRandomMonster();
 void describe(Creature player);
 
 
@@ -28,6 +32,11 @@ int main(void) {
     srand(time(NULL));
 	Monster monster;
 	Battle battle;
+    Area area;
+	// mock data to test
+	string roomdescriptions[4][4];
+	string paths[4][4][4];
+	area = Area("a leafy wood", roomdescriptions, paths);
 
     int result = Dialogue("Welcome",{"New Game"}).activate();
     switch (result) {
@@ -40,19 +49,17 @@ int main(void) {
             break;
     }
 	start:
-	result = Dialogue("What woudl you like to do?", { "Explore", "Look Around" }).activate();
+	result = Dialogue("What would you like to do?", { "Explore", "Look Around" }).activate();
 	switch (result)
 	{
 	int fight_or_flight;
 	case 1:
-		monster = Monster("Green Slime", "poison", 20, 5, 10.0, 1);
-		monster.addAttack("slime", "poison", 3, 1.0);
-		monster.addAttack("Bite", "physical", 3, 1.2);
-		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Woudl you like to?"), { "Battle", "Run Away" }).activate();
+		monster = getRandomMonster();
+		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Would you like to?"), { "Battle", "Run Away" }).activate();
 		switch (fight_or_flight){
 		case 1:
 			cout << "you choose to fight!";
-			battle = Battle(player, monster);
+			battle = Battle(&player, &monster);
 			battle.fight();
 			goto start;
 			break;
@@ -60,14 +67,28 @@ int main(void) {
 			cout << "You ran away :(";
 			break;
 
-		}
+        }
 		break;
+    case 2:
+
+            break;
+            
 	default:
 		return 0;
 		break;
 	}
 
     return 0;
+}
+Monster getRandomMonster() 
+{
+		// TODO load monster data from a database of some sorts
+		// TODO have a database of prebuilt monsters
+		Monster monster = Monster("Green Slime", "poison", 20, 5, 10.0, 1);
+		monster.addAttack("slime", "poison", 3, 1.0);
+		monster.addAttack("Bite", "physical", 3, 1.2);
+		return monster;
+
 }
 
 Creature dialogue_newChar()

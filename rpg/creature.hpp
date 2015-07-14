@@ -11,14 +11,13 @@
 
 #include <string>
 #include "monster.hpp"
-using namespace std;
 
 class Creature
 {
 public:
-    string name;
-    string className;
-	vector < Attack > attacks;
+    std::string name;
+    std::string className;
+	std::vector < Attack > attacks;
     
     // Creature stats. Reasonable values are in parentheses
     int health;     // Current hit points (10-1000+)
@@ -41,7 +40,7 @@ public:
     // for a decent scale
     unsigned int exp;
 
-    Creature(string name, int health, int str, int end, int dex, int intelligence, double hitRate, unsigned int level = 1, string className = "")
+    Creature(std::string name, int health, int str, int end, int dex, int intelligence, double hitRate, unsigned int level = 1, std::string className = "")
     {
         this->name = name;
         this->health = health;
@@ -131,12 +130,12 @@ public:
             this->dex += dexBoost;
             
             // Tell the user they grew a level
-            cout << "Congratualions " << this->name << " has leveled up" << endl;
-            cout << "Strength: " << this->str << endl;
-            cout << "Endurance: " << this->end << endl;
-            cout << "Dexterity: " << this->dex << endl;
-			cout << "Intelligence: " << this->intelligence << endl;
-            cout << "Now has " << this->health << endl;
+            std::cout << "Congratualions " << this->name << " has leveled up" << std::endl;
+            std::cout << "Strength: " << this->str << std::endl;
+            std::cout << "Endurance: " << this->end << std::endl;
+            std::cout << "Dexterity: " << this->dex << std::endl;
+			std::cout << "Intelligence: " << this->intelligence << std::endl;
+            std::cout << "Now has " << this->health << std::endl;
             return true;
         }
         return false;
@@ -144,14 +143,14 @@ public:
 	// Output stats to cout
 	void describe()
 	{
-		cout << "You are a level " << this->level << " " << this->className << endl;
-		cout << "Strength: " << this->str << endl;
-		cout << "Endurance: " << this->end << endl;
-		cout << "Dexterity: " << this->dex << endl;
-		cout << "Intelligence: " << this->intelligence << endl;
+		std::cout << "You are a level " << this->level << " " << this->className << std::endl;
+		std::cout << "Strength: " << this->str << std::endl;
+		std::cout << "Endurance: " << this->end << std::endl;
+		std::cout << "Dexterity: " << this->dex << std::endl;
+		std::cout << "Intelligence: " << this->intelligence << std::endl;
 	}
 	//add an attack to the attack vector
-	void addAttack(string attack_name, string attack_type, int baseDamage, double baseMultiplier)
+	void addAttack(std::string attack_name, std::string attack_type, int baseDamage, double baseMultiplier)
 	{
 		Attack new_attack = Attack(attack_name, attack_type, baseDamage, baseMultiplier);
 		this->attacks.push_back(new_attack);
