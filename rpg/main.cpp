@@ -20,6 +20,7 @@
 #include "area.hpp"
 #include "room.hpp"
 #include "path.hpp"
+using namespace std;
 
 Creature dialogue_newChar();
 Monster getRandomMonster();
@@ -57,13 +58,13 @@ int main(void) {
 		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Would you like to?"), { "Battle", "Run Away" }).activate();
 		switch (fight_or_flight){
 		case 1:
-			std::cout << "you choose to fight!";
+			cout << "you choose to fight!";
 			battle = Battle(&player, &monster);
 			battle.fight();
 			goto start;
 			break;
 		default:
-			std::cout << "You ran away :(";
+			cout << "You ran away :(";
 			break;
 
         }
@@ -93,9 +94,9 @@ Monster getRandomMonster()
 Creature dialogue_newChar()
 {
     //ask for name and class
-    std::cout << "Choose your name" << std::endl;
-    std::string name;
-    std::cin >> name;
+    cout << "Choose your name" << endl;
+    string name;
+    cin >> name;
 	Creature player;
     int result = Dialogue("Choose your class", {"Fighter","Rogue", "Mage"}).activate();
     switch (result) {
