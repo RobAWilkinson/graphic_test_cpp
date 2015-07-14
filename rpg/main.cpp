@@ -22,6 +22,7 @@
 #include "path.hpp"
 
 Creature dialogue_newChar();
+Monster getRandomMonster();
 void describe(Creature player);
 
 
@@ -31,83 +32,11 @@ int main(void) {
 	Monster monster;
 	Battle battle;
     Area area;
+	// mock data to test
+	string roomdescriptions[4][4];
+	string paths[4][4][4];
+	area = Area("a leafy wood", roomdescriptions, paths);
 
-    area = Area("A leafy green wood, sunlight dapples the ground through the leaves of the tree",
-                [
-                 [ Room("a sunlight path",[
-                                           Path("a dense green wood"),
-                                           Path("a dense green wood"),
-                                           Path("a hard packed dirt path"),
-                                           Path("a dense green wood")
-                                           ]
-                        ),
-                  Room("a sunlight path",[
-                                          Path("a dense green wood"),
-                                          Path("a hard dirt path"),
-                                          Path("a hole in the dense trees"),
-                                          this->rooms[0,0].paths[2]
-                                          ]
-                       ),
-                  
-                  
-                  Room("a treasure chest", [
-                                            Path("a dense forest"),
-                                            Path("a dense forest"),
-                                            Path("a dense forest"),
-                                            Path("a crack in the trees")
-                                            ]
-                       ),
-                  Room(),
-                  ],
-                 [
-                  Room(),
-                  Room("a sunlight path", [
-                                           this->rooms[0,1,].paths[1],
-                                           Path("a sunlight path"),
-                                           Path("a sunlight path"),
-                                           Path("a sunlight path"),
-                                           this->rooms[1,1].paths[2]
-                                           ]
-                       ),
-                  Room("a sunlight path", [
-                                           this->rooms[0,2],paths[1],
-                                           Path("densely packed trees"),
-                                           Path("a sunlight path"),
-                                           Path("densely packed trees")
-                                           ]
-                       ),
-                  Room("a sunlight path", [
-                                           this->rooms[0,3].paths[1],
-                                           Path("densely packed trees"),
-                                           Path("densely packed trees"),
-                                           PAth("densely packed trees")
-                                           ]
-                       ),
-                  ],
-                 [ Room(),
-                  Room("a sunlight path", [
-                                           this->rooms[1,1,].paths[1],
-                                           Path("densely packed woods"),
-                                           Path("densely packed woods"),
-                                           Path("densely packed woods"),
-                                           ]
-                       ),
-                  Room(),
-                  Room()
-                  ],
-                 [ Room(),
-                  Room("a burning campfire", [
-                                              this->rooms[2,1].paths[1],
-                                              Path("densely packed trees"),
-                                              Path("densely packed trees"),
-                                              Path("densely packed trees")
-                                              ]
-                       ),
-                  Room(),
-                  Room()
-                  ]
-                 ]
-                );
     int result = Dialogue("Welcome",{"New Game"}).activate();
     switch (result) {
         case 1:
@@ -119,15 +48,13 @@ int main(void) {
             break;
     }
 	start:
-	result = Dialogue("What woudl you like to do?", { "Explore", "Look Around" }).activate();
+	result = Dialogue("What would you like to do?", { "Explore", "Look Around" }).activate();
 	switch (result)
 	{
 	int fight_or_flight;
 	case 1:
-		monster = Monster("Green Slime", "poison", 20, 5, 10.0, 1);
-		monster.addAttack("slime", "poison", 3, 1.0);
-		monster.addAttack("Bite", "physical", 3, 1.2);
-		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Woudl you like to?"), { "Battle", "Run Away" }).activate();
+		monster = getRandomMonster();
+		fight_or_flight = Dialogue(("A " + monster.name + "appeared \n Would you like to?"), { "Battle", "Run Away" }).activate();
 		switch (fight_or_flight){
 		case 1:
 			std::cout << "you choose to fight!";
@@ -151,6 +78,16 @@ int main(void) {
 	}
 
     return 0;
+}
+Monster getRandomMonster() 
+{
+		// TODO load monster data from a database of some sorts
+		// TODO have a database of prebuilt monsters
+		Monster monster = Monster("Green Slime", "poison", 20, 5, 10.0, 1);
+		monster.addAttack("slime", "poison", 3, 1.0);
+		monster.addAttack("Bite", "physical", 3, 1.2);
+		return monster;
+
 }
 
 Creature dialogue_newChar()

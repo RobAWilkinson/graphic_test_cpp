@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 #include "room.hpp"
+#include "path.hpp"
+using namespace std;
 class Area
 {
 public:
@@ -20,12 +22,12 @@ public:
     Room rooms[4][4];
     // Empty Initializer
 
-    Area(std::string description, Room rooms[][4])
+    Area(std::string description, string rooms[4][4], string paths[4][4][4] )
     {
         this->description = description;
         for (int i; i < 4; i++) {
             for (int j ; i < 4; i++) {
-                this->rooms[i][j] = rooms[i][j];
+                this->rooms[i][j] = Room(rooms[i][j], paths[i][j]);
             }
         }
         
@@ -36,8 +38,6 @@ public:
         return this->rooms[y-1][x-1];
     }
     Area(){}
-    
-    
     
 };
 

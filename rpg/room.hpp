@@ -9,18 +9,24 @@
 #ifndef ROOM_HPP
 #define ROOM_HPP
 #include "path.hpp"
+#include <vector>
+using namespace std;
 
 class Room
 {
 public:
     
     std::string center;
-    Path* path;
+	std::vector < Path > paths;
     // Empty initliazer
-    Room(std::string center, Path paths[4])
+    Room(std::string center, string paths[4])
     {
         this->center = center;
-        this->path = paths;
+		for(int i = 0; i < 4; i++) {
+
+        this->paths.push_back(Path(paths[i]));
+		}
+		
 
     }
     Room(){}

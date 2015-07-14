@@ -8,13 +8,13 @@
 
 #ifndef PATH_hpp
 #define PATH_hpp
-#include <string>
+using namespace std;
 
 class Path
 {
 public:
-    std::string description;
-    Path(std::string description)
+    string description;
+    Path(string description)
     {
         this->description = description;
         
