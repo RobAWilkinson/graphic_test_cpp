@@ -32,6 +32,8 @@ int main(void) {
     srand(time(NULL));
   Monster monster;
   Battle battle;
+  Area start_area;
+  Room first_room;
     Area area;
   // mock data to test
   string roomdescriptions[4][4];
@@ -41,6 +43,8 @@ int main(void) {
     int result = Dialogue("Welcome", {"New Game"}).activate();
     switch (result) {
         case 1:
+	  	  	  start_area = Area("the seedy underbelly of the city", 16, 16);
+	  	  	  first_room  = Room("afilled with broken PC parts", 0, 0, &start_area);
             player = dialogue_newChar();
       player.describe();
             break;
@@ -49,36 +53,39 @@ int main(void) {
             break;
     }
   start:
-  result = Dialogue(
-    "What would you like to do?",
-    { "Explore", "Look Around" }
-  ).activate();
-  switch (result) {
-    int fight_or_flight;
-    case 1:
-      monster = getRandomMonster();
-      fight_or_flight = Dialogue(
-        ("A " + monster.name + "appeared \n Would you like to?"),
-        { "Battle", "Run Away" }
-      ).activate();
-      switch (fight_or_flight) {
-        case 1:
-          cout << "you choose to fight!";
-          battle = Battle(&player, &monster);
-          battle.fight();
-          goto start;
-          break;
-        default:
-          cout << "You ran away :(";
-          break;
-      }
-      break;
-    case 2:
-      break;
-    default:
-      return 0;
-      break;
-  }
+  	  result = Dialogue(
+    	"What would you like to do?",
+    	{ "Explore", "Look Around" }
+  	  ).activate();
+  	  switch (result) {
+    	int fight_or_flight;
+    	case 1:
+      	  monster = getRandomMonster();
+      	  fight_or_flight = Dialogue(
+        	("A " + monster.name + "appeared \n Would you like to?"),
+        	{ "Battle", "Run Away" }
+      	  ).activate();
+      	  switch (fight_or_flight) {
+        	case 1:
+          	  cout << "you choose to fight!";
+          	  battle = Battle(&player, &monster);
+          	  battle.fight();
+          	  goto start;
+          	  break;
+        	default:
+          	  cout << "You ran away :(";
+          	  break;
+      	  }
+      	  break;
+	  	  // they choose to explore
+    	case 2:
+	  	  // Describe the area and then list all possible avenues
+	  	  // first_room./describe
+
+      	  break;
+    	default:
+      	  return 0;
+  	  }
   return 0;
 }
 Monster getRandomMonster() {

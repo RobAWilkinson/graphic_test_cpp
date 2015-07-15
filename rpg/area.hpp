@@ -12,26 +12,28 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "room.hpp"
 #include "path.hpp"
+#include "monster.hpp"
 using namespace std;
 class Area {
  public:
     std::string description;
-    vector<Room> rooms;
     vector<Monster> monsters;
+	int height, width;
     int start[2];
 
     // Empty Initializer
 
-    Area(std::string description, int start[2] ) {
+    Area(std::string description, int height, int width) {
+		if(!height) {
+			height = 16;
+		}
+		if(!height) {
+			height = 16;
+		}
         this->description = description;
-        this->start[0] = start[0];
-        this->start[1] = start[1];
-    }
-    Area * append_room(Room room) {
-      this->rooms.push_back(room);
-      return this;
+		this->height = height;
+		this->width = width;
     }
     Area * add_monster(Monster monster) {
       this->monsters.push_back(monster);
