@@ -15,30 +15,33 @@
 #include "room.hpp"
 #include "path.hpp"
 using namespace std;
-class Area
-{
-public:
+class Area {
+ public:
     std::string description;
-    Room rooms[4][4];
+    vector<Room> rooms;
+    vector<Monster> monsters;
+    int start[2];
+
     // Empty Initializer
 
-    Area(std::string description, string rooms[4][4], string paths[4][4][4] )
-    {
+    Area(std::string description, int start[2] ) {
         this->description = description;
-        for (int i; i < 4; i++) {
-            for (int j ; i < 4; i++) {
-                this->rooms[i][j] = Room(rooms[i][j], paths[i][j]);
-            }
-        }
-        
-        
+        this->start[0] = start[0];
+        this->start[1] = start[1];
     }
-    Room findRoom(int x, int y)
-    {
-        return this->rooms[y-1][x-1];
+    Area * append_room(Room room) {
+      this->rooms.push_back(room);
+      return this;
     }
+    Area * add_monster(Monster monster) {
+      this->monsters.push_back(monster);
+      return this;
+    }
+    // TODO(sam) fix this
+    // Room find_room(int x, int y) {
+    //     return this->rooms[y-1][x-1];
+    // }
     Area(){}
-    
 };
 
 #endif
